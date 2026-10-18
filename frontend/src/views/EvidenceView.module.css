@@ -1,0 +1,138 @@
+.viewContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.5rem;
+  flex: 1;
+  max-width: 1200px;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-block-end: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pageTitle {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.pageDescription {
+  color: var(--color-ink-muted);
+  font-size: 0.9375rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.uploadBtn {
+  background-color: var(--color-cobalt);
+  color: var(--color-paper);
+  border: none;
+  border-radius: var(--radius-control);
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.uploadBtn:hover {
+  background-color: var(--color-cobalt-hover);
+}
+
+.uploadBtn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.tableContainer {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-line);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: start;
+}
+
+.table th {
+  background-color: var(--color-stone);
+  color: var(--color-ink-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1rem;
+  border-block-end: 1px solid var(--color-line);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.875rem 1rem;
+  border-block-end: 1px solid var(--color-line);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-block-end: none;
+}
+
+.fileName {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.numCell {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.linkedBadge {
+  display: inline-block;
+  background-color: var(--color-stone);
+  border: 1px solid var(--color-line);
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  margin-inline-end: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Modal form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.fileInput {
+  border: 1px dashed var(--color-line);
+  padding: 1.25rem;
+  background-color: var(--color-stone);
+  cursor: pointer;
+  border-radius: var(--radius-control);
+  font-size: 0.875rem;
+}
+
+.errorText {
+  color: var(--color-gap);
+  font-size: 0.8125rem;
+}

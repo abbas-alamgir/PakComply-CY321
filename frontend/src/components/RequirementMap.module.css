@@ -1,0 +1,81 @@
+.mapContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-block-end: 1.5rem;
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-line);
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8125rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+  gap: 0.375rem;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.25rem;
+  background-color: var(--color-stone);
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0; /* Strict: border radius ONLY on buttons and inputs */
+  transition: border-color 0.15s ease;
+  min-height: 52px;
+}
+
+.tile:hover {
+  border-color: var(--color-cobalt);
+}
+
+.tile:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -1px;
+}
+
+.tile.selected {
+  background-color: var(--color-cobalt-subtle);
+  border-color: var(--color-cobalt);
+}
+
+.clauseNumber {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.tileShape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

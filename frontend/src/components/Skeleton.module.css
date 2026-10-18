@@ -1,0 +1,19 @@
+.skeleton {
+  background-color: var(--color-line);
+  border-radius: var(--radius-control);
+  width: 100%;
+}
+
+.tableSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-line);
+}
+
+.row {
+  height: 28px;
+  background-color: #E6EAE8;
+}

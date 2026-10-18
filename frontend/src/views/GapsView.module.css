@@ -1,0 +1,125 @@
+.viewContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.5rem;
+  flex: 1;
+  max-width: 1200px;
+}
+
+.pageHeader {
+  margin-block-end: 1.5rem;
+}
+
+.pageTitle {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.pageDescription {
+  color: var(--color-ink-muted);
+  font-size: 0.9375rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.tableContainer {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-line);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: start;
+}
+
+.table th {
+  background-color: var(--color-stone);
+  color: var(--color-ink-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1rem;
+  border-block-end: 1px solid var(--color-line);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.875rem 1rem;
+  border-block-end: 1px solid var(--color-line);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-block-end: none;
+}
+
+.clauseCell {
+  font-weight: 700;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.titleCell {
+  max-width: 440px;
+}
+
+.gapTitle {
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-block-end: 0.25rem;
+}
+
+.recommendation {
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+  line-height: 1.4;
+}
+
+.severityHigh {
+  color: var(--color-gap);
+  font-weight: 600;
+}
+
+.severityMedium {
+  color: var(--color-partial);
+  font-weight: 600;
+}
+
+.dateCell {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.statusPill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-control);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statusOpen {
+  background-color: var(--color-gap-subtle);
+  color: var(--color-gap);
+  border: 1px solid var(--color-gap);
+}
+
+.statusInProgress {
+  background-color: var(--color-partial-subtle);
+  color: var(--color-partial);
+  border: 1px solid var(--color-partial);
+}
+
+.statusResolved {
+  background-color: var(--color-met-subtle);
+  color: var(--color-met);
+  border: 1px solid var(--color-met);
+}
