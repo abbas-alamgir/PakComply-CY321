@@ -1,0 +1,98 @@
+/**
+ * PakComply Design System Tokens
+ * Strict implementation of color, typography, and motion specifications.
+ */
+
+:root {
+  /* Colors */
+  --color-stone: #F4F6F5;       /* Page background */
+  --color-paper: #FFFFFF;       /* Tables, panels, drawers */
+  --color-ink: #17242C;         /* Primary text */
+  --color-ink-muted: #536471;   /* Secondary/meta text */
+  --color-cobalt: #1F4E9C;      /* Primary actions, active links, focus ring */
+  --color-cobalt-hover: #173B75;
+  --color-cobalt-subtle: #EBF1FA;
+  --color-line: #D5DBD8;        /* Dividers, borders */
+
+  /* Status Colors */
+  --color-met: #2A7A4B;
+  --color-met-subtle: #EDF7F1;
+  --color-partial: #94590A;
+  --color-partial-subtle: #FDF6EC;
+  --color-gap: #B42F2B;
+  --color-gap-subtle: #FDEDEC;
+  --color-not-assessed: #66757D;
+  --color-not-assessed-subtle: #F0F2F4;
+
+  /* Typography */
+  --font-ui: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', Tahoma, sans-serif;
+
+  /* Border Radius: ONLY permitted on buttons and inputs! */
+  --radius-control: 4px;
+
+  /* Focus ring */
+  --focus-ring: 2px solid var(--color-cobalt);
+  --focus-offset: 2px;
+}
+
+/* Base Document Reset & Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--color-stone);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-stone);
+  color: var(--color-ink);
+  min-height: 100vh;
+}
+
+/* RTL Urdu Support */
+[dir="rtl"] {
+  font-family: var(--font-urdu), var(--font-ui);
+  line-height: 2.0; /* Urdu requires larger line height */
+}
+
+/* Tabular numerals for numbers */
+.num, td.num, th.num, [data-numeric] {
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+/* Text block line length limit (<80 characters) */
+.prose, p, .text-block {
+  max-width: 75ch;
+}
+
+/* Accessible Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Motion Rules: NONE on load. Only responsive to user actions. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

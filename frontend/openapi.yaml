@@ -1,0 +1,455 @@
+openapi: 3.0.3
+info:
+  title: PakComply API
+  version: 1.0.0
+  description: >
+    Data protection compliance assessment and management API for Pakistan Data Protection Bill (2023 Draft)
+    and PKCERT Data Protection Advisory (2025).
+servers:
+  - url: /api
+    description: Mock Service Worker / Django backend proxy
+paths:
+  /organizations/current:
+    get:
+      summary: Get current organization profile
+      operationId: getCurrentOrganization
+      responses:
+        '200':
+          description: Organization retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+  /frameworks:
+    get:
+      summary: List compliance frameworks (Draft Bill 2023, PKCERT 2025)
+      operationId: listFrameworks
+      responses:
+        '200':
+          description: List of frameworks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Framework'
+  /requirements:
+    get:
+      summary: List all framework requirements
+      operationId: listRequirements
+      parameters:
+        - name: frameworkId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: area
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/ComplianceArea'
+      responses:
+        '200':
+          description: List of requirements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Requirement'
+  /assessments/active:
+    get:
+      summary: Get current active assessment
+      operationId: getActiveAssessment
+      responses:
+        '200':
+          description: Active assessment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assessment'
+  /answers:
+    post:
+      summary: Save or update requirement answer
+      operationId: saveAnswer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answer'
+      responses:
+        '200':
+          description: Answer recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
+  /gaps:
+    get:
+      summary: List identified compliance gaps
+      operationId: listGaps
+      responses:
+        '200':
+          description: List of gaps
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gap'
+  /evidence:
+    get:
+      summary: List uploaded compliance evidence
+      operationId: listEvidence
+      responses:
+        '200':
+          description: List of evidence items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evidence'
+    post:
+      summary: Upload new compliance evidence
+      operationId: uploadEvidence
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                linkedRequirementIds:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Evidence recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evidence'
+  /processing-activities:
+    get:
+      summary: List processing activities (Article 30 Record of Processing)
+      operationId: listProcessingActivities
+      responses:
+        '200':
+          description: Processing activities retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProcessingActivity'
+  /reports:
+    get:
+      summary: List generated compliance reports
+      operationId: listReports
+      responses:
+        '200':
+          description: List of reports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+    post:
+      summary: Generate new compliance report
+      operationId: generateReport
+      responses:
+        '201':
+          description: Report generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+  /audit-logs:
+    get:
+      summary: List compliance audit trail logs
+      operationId: listAuditLogs
+      responses:
+        '200':
+          description: Audit logs retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditLogEntry'
+
+components:
+  schemas:
+    Role:
+      type: string
+      enum: [admin, reviewer, viewer]
+    ComplianceArea:
+      type: string
+      enum: [processing, policy, consent, retention, security]
+    Severity:
+      type: string
+      enum: [high, medium, low]
+    RequirementStatus:
+      type: string
+      enum: [met, partial, gap, not_assessed]
+    AnswerValue:
+      type: string
+      enum: [yes, partial, no, na]
+
+    Organization:
+      type: object
+      required: [id, name, sector, registrationNumber]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sector:
+          type: string
+        registrationNumber:
+          type: string
+        dataProtectionOfficer:
+          type: string
+
+    User:
+      type: object
+      required: [id, name, email, role]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+
+    Framework:
+      type: object
+      required: [id, name, version, status, updatedAt]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        status:
+          type: string
+          enum: [draft, advisory]
+        updatedAt:
+          type: string
+          format: date-time
+
+    Requirement:
+      type: object
+      required: [id, frameworkId, clause, title, text, severity, area, status]
+      properties:
+        id:
+          type: string
+        frameworkId:
+          type: string
+        clause:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        severity:
+          $ref: '#/components/schemas/Severity'
+        area:
+          $ref: '#/components/schemas/ComplianceArea'
+        status:
+          $ref: '#/components/schemas/RequirementStatus'
+        legalReference:
+          type: string
+
+    Answer:
+      type: object
+      required: [requirementId, value]
+      properties:
+        id:
+          type: string
+        assessmentId:
+          type: string
+        requirementId:
+          type: string
+        value:
+          $ref: '#/components/schemas/AnswerValue'
+        note:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+
+    Assessment:
+      type: object
+      required: [id, organizationId, frameworkId, status, updatedAt]
+      properties:
+        id:
+          type: string
+        organizationId:
+          type: string
+        frameworkId:
+          type: string
+        status:
+          type: string
+          enum: [in_progress, completed]
+        updatedAt:
+          type: string
+          format: date-time
+        disclaimer:
+          type: string
+          example: "Assessed against the 2023 draft bill. Not legal advice or certification."
+        answersCount:
+          type: integer
+        totalRequirements:
+          type: integer
+        scorePercentage:
+          type: number
+
+    Gap:
+      type: object
+      required: [id, requirementId, severity, status, recommendation, ownerId, dueDate]
+      properties:
+        id:
+          type: string
+        requirementId:
+          type: string
+        severity:
+          $ref: '#/components/schemas/Severity'
+        status:
+          type: string
+          enum: [open, in_progress, resolved]
+        recommendation:
+          type: string
+        ownerId:
+          type: string
+        ownerName:
+          type: string
+        dueDate:
+          type: string
+          format: date
+
+    Task:
+      type: object
+      required: [id, title, status, priority, dueDate]
+      properties:
+        id:
+          type: string
+        gapId:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+          enum: [todo, in_progress, done]
+        priority:
+          $ref: '#/components/schemas/Severity'
+        dueDate:
+          type: string
+          format: date
+
+    Evidence:
+      type: object
+      required: [id, fileName, fileSize, mimeType, linkedRequirementIds, uploadedBy, uploadedAt, version]
+      properties:
+        id:
+          type: string
+        fileName:
+          type: string
+        fileSize:
+          type: integer
+        mimeType:
+          type: string
+        linkedRequirementIds:
+          type: array
+          items:
+            type: string
+        expiresAt:
+          type: string
+          format: date
+        version:
+          type: string
+        uploadedBy:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+
+    ProcessingActivity:
+      type: object
+      required: [id, dataType, purpose, consentBasis, retentionPeriod, storageLocation, vendors]
+      properties:
+        id:
+          type: string
+        dataType:
+          type: string
+        purpose:
+          type: string
+        consentBasis:
+          type: string
+        retentionPeriod:
+          type: string
+        storageLocation:
+          type: string
+        vendors:
+          type: array
+          items:
+            type: string
+
+    Report:
+      type: object
+      required: [id, title, generatedAt, generatedBy, disclaimer, scorePercentage]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        generatedAt:
+          type: string
+          format: date-time
+        generatedBy:
+          type: string
+        disclaimer:
+          type: string
+          example: "Assessed against the 2023 draft bill. Not legal advice or certification."
+        scorePercentage:
+          type: number
+        metCount:
+          type: integer
+        partialCount:
+          type: integer
+        gapCount:
+          type: integer
+        notAssessedCount:
+          type: integer
+
+    AuditLogEntry:
+      type: object
+      required: [id, timestamp, actorId, actorName, action, targetType, targetId, details]
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        actorId:
+          type: string
+        actorName:
+          type: string
+        action:
+          type: string
+        targetType:
+          type: string
+        targetId:
+          type: string
+        details:
+          type: string
