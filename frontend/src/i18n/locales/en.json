@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "PakComply",
+    "tagline": "Data protection compliance assessment and management",
+    "standard": "Pakistan Data Protection Bill (2023 Draft) & PKCERT Advisory (2025)"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "assessment": "Assessment checklist",
+    "gaps": "Gaps & tasks",
+    "evidence": "Evidence vault",
+    "processing": "Processing activities",
+    "reports": "Reports",
+    "audit": "Audit log"
+  },
+  "common": {
+    "close": "Close",
+    "retry": "Retry request",
+    "save": "Save answers",
+    "upload": "Upload evidence",
+    "generate": "Generate report",
+    "saved": "Answers saved",
+    "uploaded": "Evidence uploaded",
+    "generated": "Report generated",
+    "loading": "Loading...",
+    "search": "Search requirements",
+    "filter": "Filter by area",
+    "allAreas": "All areas",
+    "language": "Language",
+    "role": "Role"
+  },
+  "disclaimer": {
+    "prefix": "Draft Notice:",
+    "text": "Assessed against the 2023 draft bill. Not legal advice or certification."
+  },
+  "status": {
+    "met": "Met",
+    "partial": "Partial",
+    "gap": "Gap",
+    "not_assessed": "Not assessed"
+  },
+  "severity": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "area": {
+    "processing": "Data Processing",
+    "policy": "Privacy Policy",
+    "consent": "Consent Management",
+    "retention": "Data Retention",
+    "security": "Security Controls"
+  },
+  "map": {
+    "title": "Requirement map",
+    "ariaLabel": "Requirement compliance map",
+    "listLabel": "Requirements list"
+  },
+  "assessment": {
+    "title": "Compliance assessment",
+    "description": "Evaluate organization practices against statutory clauses of the 2023 draft bill and PKCERT advisory.",
+    "clause": "Clause",
+    "requirement": "Requirement",
+    "area": "Area",
+    "severity": "Severity",
+    "status": "Status",
+    "actions": "Actions",
+    "viewDetails": "View details",
+    "answer": "Answer",
+    "notes": "Assessment notes",
+    "notesPlaceholder": "Record operational observations and evidence references...",
+    "answerYes": "Yes - fully compliant",
+    "answerPartial": "Partial - controls in progress",
+    "answerNo": "No - gap identified",
+    "answerNa": "Not applicable",
+    "saveSuccess": "Answers saved"
+  },
+  "gaps": {
+    "title": "Compliance gaps",
+    "description": "Deficiencies identified during assessment requiring remediation under the 2023 draft bill.",
+    "recommendation": "Recommendation",
+    "owner": "Owner",
+    "dueDate": "Due date",
+    "emptyTitle": "No compliance gaps identified",
+    "emptyDesc": "Complete the assessment checklist to identify and remediate compliance gaps.",
+    "startAction": "Start assessment"
+  },
+  "evidence": {
+    "title": "Evidence vault",
+    "description": "Maintain verifiable compliance documentation, encryption policies, and consent records.",
+    "fileName": "File name",
+    "fileSize": "Size",
+    "version": "Version",
+    "uploadedBy": "Uploaded by",
+    "linkedRequirements": "Linked requirements",
+    "uploadButton": "Upload evidence",
+    "emptyTitle": "No evidence uploaded",
+    "emptyDesc": "Upload policies, architecture diagrams, or audit proofs to support assessment claims."
+  },
+  "reports": {
+    "title": "Compliance reports",
+    "description": "Generate auditable compliance evaluation summaries.",
+    "scoreLabel": "Compliance degree",
+    "generateButton": "Generate report",
+    "emptyTitle": "No reports generated",
+    "emptyDesc": "Generate an assessment report for internal review or regulatory readiness audit."
+  },
+  "error": {
+    "defaultTitle": "Request failed",
+    "offlineTitle": "No network connection",
+    "offlineMessage": "You are currently offline. Check your internet connection and retry."
+  }
+}
